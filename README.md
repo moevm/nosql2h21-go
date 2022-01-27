@@ -25,10 +25,14 @@
 
 - [Next.js](https://nextjs.org/)
   - yarn create next-app --typescript
-- Mongodb
+- Mongodb [mongoose](https://mongoosejs.com/)
   - yarn add mongoose
+- Data (replays)
+  - Fox go dataset <https://github.com/featurecat/go-dataset>
+- Typescript types
+  - npx typesync
 
-## How to start
+## How to start (***WSL specific dockerd launch***)
 
 - sudo dockerd
 - sudo docker-compose build
@@ -37,3 +41,11 @@
 ## How to stop
 
 - sudo docker-compose down
+
+## Other
+
+- Go
+  - Starter go guide <https://online-go.com/learn-to-play-go>
+  - Deeper go guide <https://www.learn-go.net/>
+  - Play <https://online-go.com/play>
+  
