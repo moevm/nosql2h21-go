@@ -21,7 +21,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         const metaData = matchData[0];
         const turnsData = matchData.slice(1);
 
-        
+        const whitePlayer = {
+            name: metaData.PW.includes(" ") ? metaData.PW.split(" ")[0] : metaData.PW,
+            lastName: metaData.PW.includes(" ") ? metaData.PW.split(" ")[1] : "",
+            rank: metaData.WR,
+        };
+        const whitePlayerRef =
+            (await PlayerModel.findOne({ name: whitePlayer.name, lastName: whitePlayer.lastName })) ||
+            (await PlayerModel.create(whitePlayer));
+
+        const blackPlayer = {
+            name: metaData.PB.includes(" ") ? metaData.PB.split(" ")[0] : metaData.PB,
+            lastName: metaData.PB.includes(" ") ? metaData.PB.split(" ")[1] : "",
+            rank: metaData.BR,
+        };
+        const blackPlayerRef =
+            (await PlayerModel.findOne({ name: blackPlayer.name, lastName: blackPlayer.lastName })) ||
+            (await PlayerModel.create(blackPlayer));
+        const turns: Turn[] = turnsData.map((turn: any) => {
+            return {
+                x: turn["B" in turn ? "B" : "W"][0].charCodeAt(0) - "a".charCodeAt(0),
+                y: turn["B" in turn ? "B" : "W"][1].charCodeAt(0) - "a".charCodeAt(0),
+                team: "B" in turn ? TeamType.Black : TeamType.White,
+            };
+        });
         
     });
 
