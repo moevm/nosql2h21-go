@@ -45,7 +45,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 team: "B" in turn ? TeamType.Black : TeamType.White,
             };
         });
-        
+        const match = {
+            event: metaData.EV ?  metaData.EV : "Fox Go server",
+            date: metaData.DT,
+            place: metaData.PC,
+            komi: metaData.KM,
+            whitePlayer: whitePlayerRef,
+            blackPlayer: blackPlayerRef,
+            result: metaData.RE,
+            turns: turns,
+        };
+        const matchRef = await MatchModel.create(match);
+
+        // let cache : any[] | null = [];
+        // const str = JSON.stringify(collection, (key, value) => {
+        //     if (typeof value === "object" && value !== null) {
+        //         if (cache.includes(value)) return;
+        //         cache.push(value);
+        //     }
+        //     return value;
+        // }, 4);
+        // cache = null; // Enable garbage collection
+
+        // const j = JSON.parse(str);
     });
 
     await Promise.all(promises);
