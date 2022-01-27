@@ -20,6 +20,8 @@ services:
         restart: always
         volumes:
             - ./database:/data/db
+        ports:
+            - 27017:27017
         command: mongod --noauth
         networks:
             - master
