@@ -37,6 +37,7 @@
 - sudo dockerd
 - sudo docker-compose build
 - sudo docker-compose up
+- localhost:3000/api/init
 
 ## How to stop
 
